@@ -1,6 +1,5 @@
 # JAVA
 
-먼저 기술 면접 대비로 진행 ⇒ 생활코딩과 블로그 글, 점프투자바로 개념 확실히 하기
 
 # JAVA란?
 
@@ -34,7 +33,7 @@
 
 # 자바 컴파일 과정을 설명
 
-![Untitled](JAVA%20c50246065428420f9397f6bcdc576a91/Untitled.png)
+![Untitled](/image/java/Untitled.png)
 
 1. .java 파일을 build하면 자바 컴파일러의 javac라는 명령어를 사용해서 .class파일을 생성한다.(.class파일은 바이트 코드로 아직 컴퓨터가 읽을 수 없는 반기계어이다.)
 2. .class 파일은 Class Loader에 의해 JVM내로 로드된다.
@@ -46,7 +45,7 @@
 
 메모리 영역에 올라가는 것들
 
-![Untitled](JAVA%20c50246065428420f9397f6bcdc576a91/Untitled%201.png)
+![Untitled](/image/java/Untitled1.png)
 
 - Interpreter : 자바 바이트 코드를 한줄 씩 실행, 속도 느리다.
 - JIT Compiler : Interpreter의 단점을 보완, 전체 바이트 코드를 컴파일, 속도가 느리지만 캐시를 사용해서 한번 컴파일 하면 다음에는 빠르게 수행된다.
@@ -126,7 +125,7 @@ JDK는 JRE+개발을 위해 필요한 도구(javac,java 등)들을 포함한다.
 - length() 메소드는 실제로 채워진 문자들의 개수를 돌려줌.
 - capacity() 메소드는 StringBuilder 객체의 저장 용량을 돌려줌. 초기 저장 용량은 16이고 필요시 자동으로 증가된다. StringBuilder 클래스의 생성자를 이용해서 초기 저장 용량을 지정할 수 있다.
 
-![Untitled](JAVA%20c50246065428420f9397f6bcdc576a91/Untitled%202.png)
+![Untitled](/image/java/Untitled2.png)
 
 [https://m.blog.naver.com/itinstructor/100203105622](https://m.blog.naver.com/itinstructor/100203105622)
 
@@ -191,7 +190,7 @@ value : 허용 |
 
 # 자바의 메모리구조
 
-![Untitled](JAVA%20c50246065428420f9397f6bcdc576a91/Untitled%203.png)
+![Untitled](/image/java/Untitled3.png)
 
 ### Method Area(메소드 or 스태틱 영역)
 
@@ -517,7 +516,7 @@ public abstract String getName(); // 추상메서드
 
 # Set, List, Map의 차이와 각각의 인터페이스 구현체의 종류
 
-![Untitled](JAVA%20c50246065428420f9397f6bcdc576a91/Untitled%204.png)
+![Untitled](/image/java/Untitled4.png)
 
 ## Map
 
