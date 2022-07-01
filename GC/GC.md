@@ -7,7 +7,7 @@ JAVA의 가비지 컬렉터는 그 동작 방식에 따라 매우 다양한 종�
 
 최초의 JAVA에서는 이들 가비지 컬렉션 작업에 애플리케이션의 사용자 코드가 관여하지 않도록 구현되어 있었다. 그러나 위 2가지 작업에서 좀 더 다양한 방법으로 객체를 처리하려는 요구가 있었다. 이에 따라 JDK 1.2부터는 java.lang.ref 패키지를 추가해 제한적이나마 사용자 코드와 GC가 상호작용할 수 있게 되었다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled.png)
+![Untitled](/image/gc/Untitled.png)
 
 ## Minor GC
 
@@ -31,7 +31,7 @@ Old영역에 있는 모든 객체들을 검사하여 참조되지 않은 객체�
 
 이들 중 2,3,4는 Root Set으로 reachability를 판가름하는 기준이 된다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%201.png)
+![Untitled](/image/gc/Untitled1.png)
 
 객체의 reachability를 조절하기 위해 java.lang.ref 패키지의 SoftReference, WeakReference, PhantomReference,ReferenvceQueue 등을 사용한다.
 
@@ -55,7 +55,7 @@ JAVA에서는 개발자가 프로그램 코드로 메모리를 명시적으로 �
 
 영역별 데이터 흐름을 그림으로 살펴보면 다음과 같다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%202.png)
+![Untitled](/image/gc/Untitled2.png)
 
 위 그림의 Perm 영역(Permanent Generation)은 Method Area라고 한다. 객체의 억류된 문자열 정보를 저장하는 곳이며, Old 영역에서 살아남은 객체가 영원히 남아있는 곳은 절대 아니다. 이 영역에서 GC가 발생할 수도 있는데, 여기서 GC가 발생해도 Major GC에 포함된다.
 
@@ -63,7 +63,7 @@ JAVA에서는 개발자가 프로그램 코드로 메모리를 명시적으로 �
 
 카드 테이블에는 Old 영역에 있는 객체가 Young 영역의 객체를 참조할 때마다 정보가 표시된다. Young 영역의 GC를 실행할 때에는 Old 영역에 있는 모든 객체의 참조를 확인하지 않고, 이 카드 테이블만 뒤져서 GC 대상인지 식별한다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%203.png)
+![Untitled](/image/gc/Untitled3.png)
 
 카드 테이블은 write barrier를 사용하여 관리한다. write barrier는 Minor GC를 빠르게 할 수 있도록 하는 장치이다. write barrier 때문에 약간의 오버헤드는 발생하지만 전반적인 GC 시간은 줄어들게 된다.
 
@@ -84,7 +84,7 @@ Survivor 영역 중 하나는 반드시 비어있는 상태로 남아있어야 �
 
 이렇게 Minor GC를 통해 Old 영역까지 데이터가 쌓인 것을 간단히 나타내면 다음과 같다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%204.png)
+![Untitled](/image/gc/Untitled4.png)
 
 참고로, HotSpot VM에서는 보다 빠른 메모리 할당을 위해 두 가지 기술을 사용한다. 하나는 bump-the-pointer라는 기술이며, 다른 하나는 TLABs(Thread-Local Allocation Buffers)라는 기술이다.
 
@@ -118,7 +118,7 @@ Serial GC는 적은 메모리와 CPU 코어 개수가 적을 때 적합한 방�
 
 Parallel GC는 Serial GC와 기본적인 알고리즘은 같다. 그러나 Serial GC를 처리하는 스레드가 하나인 것에 비해, Parallel GC는 GC를 처리하는 쓰레드가 여러개이다. 그렇기 때문에 Serial GC보다 빠르게 객체를 처리할 수 있다. Parallel GC는 메모리가 충분하고 코어의 개수가 많을 때 유리하다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%205.png)
+![Untitled](/image/gc/Untitled5.png)
 
 ## Parallel Old GC
 
@@ -128,7 +128,7 @@ Parallel GC 와 비교하여 Old 영역의 GC 알고리즘만 다르다. 이 방
 
 다음 그림은 Serial GC와 CMS GC의 절차를 비교한 그림이다. 그림에서 보듯이 CMS GC는 지금까지 설명한 GC보다 더 복잡하다.
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%206.png)
+![Untitled](/image/gc/Untitled6.png)
 
 초기 이니셜 마크 단계에서는 클래스 로더에서 가장 가까운 객체 중 살아 있는 객체만 찾는 것으로 끝낸다. 따라서, 멈추는 시간은 매우 짧다. 그리고 Concurrent Mark 단계에서는 방금 살아있다고 확인한 객체에서 참조하고 있는 객체들을 따라가면서 확인한다. 이 단계의 특징은 다른 스레드가 실행 중인 상태에서 동시에 진행된다는 것이다.
 
@@ -145,7 +145,7 @@ Parallel GC 와 비교하여 Old 영역의 GC 알고리즘만 다르다. 이 방
 
 ## G1 GC
 
-![Untitled](GC%20646308d2cc86400ebb8405170dd2ab8a/Untitled%207.png)
+![Untitled](/image/gc/Untitled7.png)
 
 G1 GC는 바둑판의 각 영역에 객체를 할당하고 GC를 실행한다. 그러다가, 해당 영역이 꽉 차면 다른 영역에서 객체를 할당하고 GC를 실행한다. 즉, young 영역에서 데이터가 Old 영역으로 이동하는 단계가 사라진 GC 방식이라고 보면 된다. G1 GC는 CMS GC를 대체하기 위해 만들어 졌다.
 
