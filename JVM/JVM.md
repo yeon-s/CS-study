@@ -28,7 +28,7 @@
 
 이러한 실행과정 속에서 JVM은 필요에 따라 Thread Synchronization와 GC같은 관리작업을 수행.
 
-![Untitled](JVM%20c1caeaaf024c46fa8cb0a491e94c814f/Untitled.png)
+![Untitled](/image/jvm/Untitled.png)
 
 ## JVM 구성
 
@@ -56,7 +56,7 @@ GC를 수행하는 모듈(쓰레드)이 있다.
 
 프로그램을 수행하기 위해 OS에서 할당받은 메모리 공간
 
-![Untitled](JVM%20c1caeaaf024c46fa8cb0a491e94c814f/Untitled%201.png)
+![Untitled](/image/jvm/Untitled1.png)
 
 ### PC Register
 
@@ -96,7 +96,7 @@ class인지 Interface인지 여부 저장, Type의 속성, 전체 이름, super 
 
 객체를 저장하는 가상 메모리 공간이다. new 연산자로 생성된 객체와 배열을 저장한다. 물론 class area영역에 올라온 클래스들만 객체로 생성할 수 있다. 힙은 세 부분으로 나눌 수 있다.
 
-![Untitled](JVM%20c1caeaaf024c46fa8cb0a491e94c814f/Untitled%202.png)
+![Untitled](/image/jvm/Untitled2.png)
 
 ### Permanent Generation
 
