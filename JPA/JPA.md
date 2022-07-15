@@ -181,7 +181,7 @@ JPA는 개발자가 연관된 엔티티의 조회 시점을 선택할 수 있도
 
 대부분의 JPA 구현체는 즉시 로딩을 최적화하기 위해 가능하면 조인 쿼리를 사용한다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled.png)
+![Untitled](/image/jpa/Untitled.png)
 
 **nullable 설정에 따른 조인 전략**
 
@@ -203,7 +203,7 @@ JPA는 개발자가 연관된 엔티티의 조회 시점을 선택할 수 있도
 
 **즉시 로딩이 좋은지 지연 로딩이 좋은지는 상황에 따라 다르다.**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%201.png)
+![Untitled](/image/jpa/Untitled%201.png)
 
 ### JPA 기본 페치 전략
 
@@ -261,7 +261,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 스프링 컨테이너는 트랜잭션 범위의 영속성 컨텍스트 전략을 기본으로 사용한다. 이 전략은 이름 그대로 트랜잭션의 범위와 영속성 컨텍스트의 생존 범위가 같다는 뜻이다. 스프링 프레임워크를 사용하면 보통 비즈니스 로직을 시작하는 서비스 계층에 @Transactional 어노테이션을 선언해서 트랜잭션을 시작한다. 이 어노테이션이 있으면 호출한 메소드를 실행하기 직전에 스프링의 트랜잭션 AOP가 먼저 동작한다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%202.png)
+![Untitled](/image/jpa/Untitled%202.png)
 
 - 엔티티 매니저는 달라도 같은 트랜잭션 범위에 있으면 같은 영속성 컨텍스트 사용한다.
 - 여러 스레드에서 동시에 요청이 와서 같은 엔티티 매니저를 사용해도 트랜잭션에 따라 접근하는 영속성 컨텍스트가 다르다. (스프링 컨테이너는 스레드마다 각각 다른 트랜잭션을 할당한다. ⇒ 따라서 같은 엔티티 매니저를 호출해도 접근하는 영속성 컨텍스트가 다르므로 멀티 쓰레드 상황에 안전하다.)
@@ -299,7 +299,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 ### 일관성 없는 읽기
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%203.png)
+![Untitled](/image/jpa/Untitled%203.png)
 
 세션 2는 동시에 실행되고 있는 세션 1 때문에, 데이터에 접근하는 시점마다 다른 값을 읽게된다. 이를 일관성 없는 읽기라고 한다.
 
@@ -307,7 +307,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 ### 손실되는 업데이트
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%204.png)
+![Untitled](/image/jpa/Untitled%204.png)
 
 더 늦게 시작한 세션 2에 의해 세션 1의 변경사항이 무시되는 현상.
 
@@ -315,7 +315,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 ### 낙관적 락
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%205.png)
+![Untitled](/image/jpa/Untitled%205.png)
 
 낙관적 락은 ‘저장 시 체크한다’ 이다. 세션 1이 데이터 A를 읽어왔더라도 세션 2는 자유롭게 데이터 A를 읽을 수 있다. 다만 저장하려고 할때, 저장하려는 대상 데이터가 세션2가 들고있던 데이터와 상이하면 저장이 되지 않는다.
 
@@ -323,7 +323,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 ### 비관적 락
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%206.png)
+![Untitled](/image/jpa/Untitled%206.png)
 
 비관적 락은 ‘이미 읽고 있는 사람이 있다면 나는 못읽어’이다. 보수적인 잠금이라고 할 수 있다. 낙관적 락에 비해 비관적 락은 세션이 실패할 확률은 줄여주지만 동시성은 떨어진다.
 
@@ -333,7 +333,7 @@ JPA 기본 페치 전략은 연관된 엔티티가 하나면 즉시로딩을, �
 
 데이터베이스 시스템에서 세션은 ‘트랜잭션’이다. 트랜잭션의 특성 4자기 ACID 중 Isolation은 트랜잭션의 동시성 제어와 깊이 관련이 있다. Isolation의 정도를 나타내는 격리 수준 4가지가 데이터베이스 동시성 제어의 핵심이다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%207.png)
+![Untitled](/image/jpa/Untitled%207.png)
 
 ### JPA의 동시성 제어
 
@@ -341,13 +341,13 @@ JPA 시스템에서 세션은 하나의 JPA 트랜잭션이다. JPA에서의 읽
 
 **JPA 낙관적 락**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%208.png)
+![Untitled](/image/jpa/Untitled%208.png)
 
 JPA의 버전 관리 기능( @Version)을 이용해 Entity의 버전을 관리해 낙관적 락을 구현한다. 애플리케이션 레벨에서의 잠금이며, 낙관적 락이므로 두번째 세션이 Write하기 전까지는 충돌을 알 수 없다. 동시성을 높일 수 있지만, 잘 진행되고 있던 프로세스가 변경 사항을 저장하려고 할 때가지 프로세스의 성패를 예측할 수 없다는 것이 단점이다.
 
 **JPA 비관적 락**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%209.png)
+![Untitled](/image/jpa/Untitled%209.png)
 
 데이터베이스가 제공하는 락 기능을 이용해 엔티티를 영속 상태로 올릴 때부터 다른 세션에서 조회하지 못하도록 락을 건다. (select for update 구문) 동시성은 저하되지만 정확성과 세션의 성공은 보장된다.
 
@@ -361,13 +361,13 @@ JPA의 버전 관리 기능( @Version)을 이용해 Entity의 버전을 관리�
 
 이 때, 하나의 상품에 동시에 여러 주문이 들어올 때 발생할 수 있는 동시성 문제는 ‘손실되는 업데이트’이다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2010.png)
+![Untitled](/image/jpa/Untitled%2010.png)
 
 고객이 주문을 한 시점에서 재고가 2개였지만, 주문을 처리하는 과정 중 먼저 누군가 2개를 모두 주문해가면서 재고를 2개 차감했다. 따라서 재고는 0이 되었다. 하지만 현재 이 고객의 주문 세션에서는 주문이 모두 끝난뒤 재고를 2에서 1로 업데이트 하기 때문에, 손실되는 업데이트가 발생하게 된다. 재고는 더이상 믿을 수 없는 값이 되었다.
 
 ### 낙관적 락을 통한 해결
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2011.png)
+![Untitled](/image/jpa/Untitled%2011.png)
 
 낙관적 락을 이용해 아키텍처를 구성하면 믿을 수 없는 재고값 문제를 해결할 수 있다. 하지만 전체 프로세스 중 트랜잭션의 원자성을 보장하지 못하게 하는 외부 시스템 연동 같은 과정이 있다면 낙관적 락은 사용하기 어렵다. 낙관적 락은 전체 프로세스의 실패를 마지막 저장 시도 시점에 알 수 있는데, 원자적으로 롤백이 어려운 프로세스라면 전체 시스템의 정합성이 깨지기 때문이다.
 
@@ -377,7 +377,7 @@ JPA의 버전 관리 기능( @Version)을 이용해 Entity의 버전을 관리�
 
 ### 비관적 락을 통한 해결
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2012.png)
+![Untitled](/image/jpa/Untitled%2012.png)
 
 비즈니스 애플리케이션의 비관적 락은 보통 동일한 작업을 하는 프로세스들 중 단 하나만이 점유할 수 있는 리소스 (락 혹은 세마포어)를 이용해 구현한다. 한 프로세스가 재고 차감에 대한 락을 점유하고 있다면 현재 주문하려는 고객은 그 락 점유가 해제될 때까지 기다렸다가 프로세스를 실행한다. 모든 주문 프로세스가 순차적으로 진행되는 것이다.
 
@@ -417,29 +417,29 @@ JPA에서 낙관적 락을 사용하는 방법.
 
 JPA에서 낙관적 락을 사용하기 위해서는 @Version어노테이션을 붙인 필드를 추가하면 간단하게 적용할 수 있다. 특정 필드에 @Version이 붙은 필드를 추가하면 자동적으로 낙관적 락이 적용된다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2013.png)
+![Untitled](/image/jpa/Untitled%2013.png)
 
 실제로 쿼리를 실행해보면 아래와 같이 업데이트 쿼리 발행시에 조건절에 버전정보가 설정된 것을 볼 수 있다. 현재 엔티티가 가지고 있는 버전정보가 조건절에 적용되며  update문에는 +1된 값이 적용된다. 다른 트랜잭션에 의해서 이미 버전정보가 바뀐상태라고 하면 업데이트 row수가 0이 반환되면서 충돌감지가 되어 예외(OptimisticLockException)가 발생하게 된다. 일단 update문이 실행되면 위에서 언급한 암시적 잠금이 실행되며 동시에 실행된 동일한 엔티티에 대한 쿼리는 앞선 update쿼리가 커밋될때까지 대기하게 되어 정합성을 확실하게 보증할 수 있습니다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2014.png)
+![Untitled](/image/jpa/Untitled%2014.png)
 
 ### @OptimisticLocking
 
 JPA 표준 스펙에 정의되어 있는 방법이 아니어서 자주 사용되지는 않지만 Hibernate에서 제공하는 낙관적 락을 설정하는 방법이다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2015.png)
+![Untitled](/image/jpa/Untitled%2015.png)
 
 Dirty와 All은 버전필드 없이도 낙관적 락을 사용할 수 있는 방법이다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2016.png)
+![Untitled](/image/jpa/Untitled%2016.png)
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2017.png)
+![Untitled](/image/jpa/Untitled%2017.png)
 
 위의 @Version 필드에 의한 잠금과는 다르게 조건절에 전체 컬럼이 걸려있는 것을 볼 수 있다. 조건절에는 업데이트 전의 값이 바인딩 되어있다. 이와 같이 컬럼 전체에 대한 업데이트 여부를 확인함으로써 버전 없는 낙관적 락이 가능하다. 주의할 점은 All을 사용할 경우에는 @DynamicUpdate 어노테이션도 같이 사용해야한다. 이는 필드단위로 Dirty여부를 확인하기 위함이다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2018.png)
+![Untitled](/image/jpa/Untitled%2018.png)
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2019.png)
+![Untitled](/image/jpa/Untitled%2019.png)
 
 Dirty로 지정했을 경우에는 위와 같이 갱신될 컬럼의 갱신 전 값으로 조건절에 바인딩 된다. 특정한 컬럼만 충돌확인에 사용하므로 All이나 @Version을 사용했을 때에 비해 충돌 가능성을 낮출수 있다. 특정 엔티티의 서로 다른 부분을 업데이트하는 프로그램이 있을 경우 충돌하지 않고 수행이 가능하다. @DynamicUpdate를 사용하지 않으면 org.hibernate.MappingException: optimistic-lock=all/dirty requires dynamic-update=”true”와 같은 예외가 발생한다.
 
@@ -476,7 +476,7 @@ find를 사용하는 경우에는 엔티티를 영속성 컨텍스트로부터 �
 
 잠금모드를 Optimistic으로 지정해서 락을 사용하는 경우에는 버전필드의 갱신여부와 상관없이 커밋 직전에 버전을 확인하는 쿼리를 한번 더 발행한다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2020.png)
+![Untitled](/image/jpa/Untitled%2020.png)
 
 해당 엔티티에 변경사항이 있을 경우에는 update쿼리에 의해서 이미 충돌감지가 작동하므로 사실상 불필요한 쿼리가 발행될 수 있다. 다만 엔티티에 변경 없이 해당 엔티티에 대한 처리를 수행할 경우에 사용할 수 있다. 엔티티에 대한 변경이 없어 암시적인 배타락이 발생하지 않으므로 완벽한 락이라고 보기 힘든 측면이 있다. 자식 엔티티에 대한 수정을 목적으로 락을 사용하는 경우에는 빈틈이 있으므로 사용하면 안된다. 그럴 경우에는 자식 엔티티의 수정시에 변경할 필드를 추가하거나(예를 들면 자식 엔티티 수정일자 등) 아래의 Optimistic_Force_Increment 잠금모드를 사용해야한다. 
 
@@ -484,7 +484,7 @@ find를 사용하는 경우에는 엔티티를 영속성 컨텍스트로부터 �
 
 Optimistic과 달리 버전을 강제로 증가시키는 잠금이다. 커밋 직전에 아래처럼 버전만 증가시키는 쿼리가 항상 발행된다. 따라서 해당 엔티티에 변경이 있었을 경우에는 변경사항에 대한 업데이트문과 버전을 증가시키는 업데이트문에 의해 버전이 두번 증가한다. Optimistic과 동일하게 엔티티 자체에 변경사항이 있을 경우에는 불필요하게 업데이트 문이 발행되므로 주의할 필요가 있다. 그리고 암시적인 row 배타락이 발생되어 정합성을 보증할 수는 있으므로 자식 엔티티를 수정할 때 자식 엔티티 전체에 대한 잠금용도로 사용할 수 있다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2021.png)
+![Untitled](/image/jpa/Untitled%2021.png)
 
 ## 비관적 락
 
@@ -528,7 +528,7 @@ public class SomeService {
 }
 ```
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2022.png)
+![Untitled](/image/jpa/Untitled%2022.png)
 
 ## 주의사항
 
@@ -536,17 +536,17 @@ public class SomeService {
 
 일반적으로 주로 사용되는 데이터베이스는 주로 Read_Committed에 해당하는 격리수준을 가지는 경우가 많다. 하지만 JPA를 사용할 경우 한번 영속성 컨텍스트에 적재된 엔티티를 다시 조회할 경우 데이터베이스를 조회하지 않고 영속성 컨텍스트에서 엔티티를 가져오므로 Repeatable_Read 격리수준과 동일하게 동작한다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2023.png)
+![Untitled](/image/jpa/Untitled%2023.png)
 
 위 예제는 동일한 엔티티를 두번 조회하면서 두번째 조회시에 비관적 락을 사용하고 있다. 실행 결과는 아래와 같다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2024.png)
+![Untitled](/image/jpa/Untitled%2024.png)
 
 버전 필드가 존재하지 않는 엔티티의 경우 위와 같이 첫번째 조회시에 영속성 컨텍스트에 적재된 엔티티의 상태는 바뀌지 않고 단순히 select ~for update에 의한 row 배타락이 실행된다. 즉 Repeatable_Read 격리 수준과 동일하게 동작하므로 처음 엔티티가 조회되어 잠금이 실행되기 전에 다른 트랜잭션에 의해서 엔티티가 변경되어 커밋된 상태가 반영되지 않고 현재 트랜잭션의 엔티티 상태가 유지된다는 점을 주의해야 한다. 이럴 경우 앞선 트랜잭션에 의해 변경된 값을 잃어버리는 문제가 발생할 수 있다.
 
 즉, 잠금은 동작했지만 정합성에 문제가 생길 수 있다. 예를 들어 포인트를 사용하는 경우 앞선 트랜잭션에서 차감된 포인트가 반영되지 않음으로써 이중 사용 문제가 발생할 수 있다. 영속성 컨텍스트에 엔티티가 존재하는 것이 확실한 경우에는 EntityManager#refresh나 JPQL을 이용해 데이터베이스로부터 엔티티를 조회하도록 강제할 필요가 있다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2025.png)
+![Untitled](/image/jpa/Untitled%2025.png)
 
 버전 필드가 존재하는 엔티티의 경우 배타락을 실행하는 조건에 버전정보가 포함되게 된다. 이에 따라 쿼리 실행 후 배타락을 획득하기 전에 다른 트랜잭션에 의해서 버전이 증가하게 되어 잠금 획득에 실패하게 된다. 따라서 비관적 락을 이용하여 순차적인 처리를 기대한 경우라면 기대대로 동작하지 않으므로 주의해야 한다. 
 
@@ -558,7 +558,7 @@ public class SomeService {
 
 비관적 락에 의해서 데이터베이스에 row 배타락이 발생한 경우 이어서 들어오는 동일한 row에 대한 배타락 요청을 앞선 요청의 잠금이 해제될때까지 대기하게 된다. 이럴 때 잠금을 가진 요청의 처리가 길어지게 되면 커넥션 풀의 커넥션이 부족하게 되어 어플리케이션 전체가 영향을 받을 수 있다.(끔찍..) 이럴경우 잠금획득 대기시간을 설정하는 Timeout을 사용해서 데이터베이스의 잠금이 어플리케이션 전체의 장애로 확산되는 것을 방지할 수 있다. 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2026.png)
+![Untitled](/image/jpa/Untitled%2026.png)
 
 위와 같이 설정하면 select for update 쿼리에 nowait가 추가되어 잠금을 취득할 수 없을 경우 즉시 LockTimeoutException과 같은 예외가 발생한다. 밀리세컨드 단위로 시간을 지정하는 것도 가능하다. 다만 주의할 것은 데이터베이스에 따라 지원여부가 다르고 지원하지 않는 경우 무시되므로 잘 구분해서 사용해야 한다. 예를 들어 H2는 쿼리에 Timeout을 지정할 수 없고 PostgreSQL은 nowait(0으로 설정)은 지정 가능하나 시간설정은 무시되므로 주의해야 한다. 데이터베이스 별로 동작이 다른 부분이 있으므로 커넥션 단위의 설정을 이용하거나 서킷 브레이커등을 이용하는 것이 더 바람직해 보인다.
 
@@ -598,9 +598,9 @@ JPA(하이버네이트-ORM)를 사용하면 트랜잭션에 대해서 고려할 
 
 특정 Id를 select한 후 연관 테이블에 값이 없으면 insert 있으면 update하는 로직.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2027.png)
+![Untitled](/image/jpa/Untitled%2027.png)
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2028.png)
+![Untitled](/image/jpa/Untitled%2028.png)
 
 insert 로직에서 에러 발생. insert 시점에 이미 unique한 값이 대상에 존재하게 되었다.
 
@@ -608,13 +608,13 @@ insert 로직에서 에러 발생. insert 시점에 이미 unique한 값이 대�
 
 **1.비관 락 - Pessimistic_write -성공**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2029.png)
+![Untitled](/image/jpa/Untitled%2029.png)
 
 (repository 메소드에 lock어노테이션 추가한 것.)
 
 쿼리를 보면 
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2030.png)
+![Untitled](/image/jpa/Untitled%2030.png)
 
 for update 쿼리로 x lock이 사용되었다. insert가 한번만 되고 나머진 다 update되었다.
 
@@ -622,17 +622,17 @@ for update 쿼리로 x lock이 사용되었다. insert가 한번만 되고 나�
 
 쿼리를 보면
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2031.png)
+![Untitled](/image/jpa/Untitled%2031.png)
 
 lock in share mode로 쿼리가 동작하였다.( 참고: MySQL 8.0부터는 기존 lock in share mode 대신 for share라고 간략하게 적어줘도 된다.) 공유락으로 진행되서 아래와 같은 데드락 발생.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2032.png)
+![Untitled](/image/jpa/Untitled%2032.png)
 
 **3.낙관 락 - OptimisticLockException과 보상 트랜잭션 적용 - 실패**
 
 OptimisticLockException은 말 그대로 낙관적 락을 사용한 트랜잭션 중 발생한 예외로 트랜잭션 실패 대상 entity를 반환 받을 수 있는 편의성이 존재한다.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2033.png)
+![Untitled](/image/jpa/Untitled%2033.png)
 
 OptimisticLockException이 발생하기 전에 데드락이 발생하여 트랜잭션 실패에 대한 보상 트랜잭션을 실행할 수 없었다. 이유는 위의 duplicate key에 사로잡혀 ‘존재하지 않을 경우 insert’ 로직에만 집중한 탓. 근본적으로 version 컬럼을 만들어서 row의 갱신을 알아차리는 것이라하면 insert의 상황이 아닌 lost update의 방지책으로 쓰이는게 알맞아 보인다. 
 
@@ -658,7 +658,7 @@ OptimisticLockException이 발생하기 전에 데드락이 발생하여 트랜�
 
 ### 예시코드
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2034.png)
+![Untitled](/image/jpa/Untitled%2034.png)
 
 1. 오늘 날짜의 접근기록 데이터(유니크) 확인
 2. 존재하지 않으면 insert
@@ -680,7 +680,7 @@ OptimisticLockException이 발생하기 전에 데드락이 발생하여 트랜�
 
 ### 테스트
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2035.png)
+![Untitled](/image/jpa/Untitled%2035.png)
 
 쓰레드를 여러개 생성하여 호출되도록 테스트 코드를 구성하고, 호출된 횟수만큼 카운트가 증가되어야 하기 때문에 assert 조건을 쓰레드 개수와 카운트 결과 갯수로 하였다.
 
@@ -701,7 +701,7 @@ OptimisticLockException이 발생하기 전에 데드락이 발생하여 트랜�
 
 **1,2번**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2036.png)
+![Untitled](/image/jpa/Untitled%2036.png)
 
 서로 다른 쓰레드에서 insert 시도 및 예외 발생 확인 → 이 예외를 catch하여 처리 시도.
 
@@ -725,7 +725,7 @@ org.hibernate.AssertionFailure: null id in OutlinkAccessCountentry (don't flush 
 
 번갈아가며 테스트 수행
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2037.png)
+![Untitled](/image/jpa/Untitled%2037.png)
 
 모든 테스트에서 데드락 예외 발생
 
@@ -735,7 +735,7 @@ org.hibernate.AssertionFailure: null id in OutlinkAccessCountentry (don't flush 
 
 **1.org.springframework.retry:spring-retry 사용**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2038.png)
+![Untitled](/image/jpa/Untitled%2038.png)
 
 스프링에서 제공하는 retry 라이브러리 사용
 
@@ -747,11 +747,11 @@ org.hibernate.AssertionFailure: null id in OutlinkAccessCountentry (don't flush 
 
 **2.새 트랜잭션 생성으로 보상 트랜잭션 수행**
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2039.png)
+![Untitled](/image/jpa/Untitled%2039.png)
 
 새로운 트랜잭션을 생성하는 클래스를 만들고, catch 블록에서 새 트랜잭션 수행으로 count개수를 맞추도록.
 
-![Untitled](JPA%20bf3fb95112394475851f04c0b732eb35/Untitled%2040.png)
+![Untitled](/image/jpa/Untitled%2040.png)
 
 retry와 동일하게 정상 동작 확인.
 
