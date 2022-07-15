@@ -4,7 +4,7 @@
 
 ## 어플리케이션 서버와 DB - 일반적인 사용방법
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled.png)
+![Untitled](/image/database/lecture/1/Untitled.png)
 
 1. 커넥션 연결: 서버와 DB는 TCP/IP로 커넥션을 연결한다.
 2. SQL 전달: 어플리케이션 서버는 DB가 이해할 수 있는 SQL을 연결된 커넥션을 통해 DB에 전달한다.
@@ -12,7 +12,7 @@
 
 ## 어플리케이션 서버와 DB- DB변경
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled%201.png)
+![Untitled](/image/database/lecture/1/Untitled%201.png)
 
 예전에는 각각의 DB마다 사용법이 달랐다. 따라서 커넥션을 연결하는 방법 / SQL을 전달하는 방법 / 결과를 응답 받는 방법이 모두 달랐다. 따라서 예전에는 크게 두가지의 문제점이 있었다.
 
@@ -23,7 +23,7 @@
 
 ## JDBC 표준 인터페이스
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled%202.png)
+![Untitled](/image/database/lecture/1/Untitled%202.png)
 
 어플리케이션은 JDBC 표준 인터페이스에 의존한다. 그리고 JDBC는 아래 3가지 기능을 표준 인터페이스로 정의해서 제공한다. 
 
@@ -33,7 +33,7 @@
 
 위 JDBC 인터페이스를 각 DB 회사에서 구현해서 제공해준다. 이런 구현체를 JDBC 드라이버라고 한다. 예를 들어 MySQL DB에 접근할 수 있는 것은 MySQL JDBC 드라이버다.
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled%203.png)
+![Untitled](/image/database/lecture/1/Untitled%203.png)
 
 위와 같이 변경 시, MySQL을 사용하든, 오라클을 사용하든 어플리케이션은 JDBC 인터페이스에만 의존하게 된다. 그리고 실제 사용하는 시점에서는 그 DB에 맞는 구현체만 가져다 쓰면 된다.
 
@@ -54,7 +54,7 @@ JDBC를 편리하게 사용하도록 SQL Mapper와 ORM이 제공된다.
 
 ## SQL Mapper
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled%204.png)
+![Untitled](/image/database/lecture/1/Untitled%204.png)
 
 - 장점 : JDBC를 편리하게 사용하도록 도와준다.
     - SQL 응답 결과를 객체로 편리하게 반환해준다.
@@ -64,7 +64,7 @@ JDBC를 편리하게 사용하도록 SQL Mapper와 ORM이 제공된다.
 
 ## ORM 기술
 
-![Untitled](1%20JDBC%E1%84%8B%E1%85%AA%20ORM%E1%84%8B%E1%85%B4%20%E1%84%91%E1%85%B5%E1%86%AF%E1%84%8B%E1%85%AD%E1%84%89%E1%85%A5%E1%86%BC%206aa15edc8b2842f6999388128b8ef459/Untitled%205.png)
+![Untitled](/image/database/lecture/1/Untitled%205.png)
 
 - ORM은 객체를 RDBMS에 매핑해주는 기술이다.
 - ORM 기술은 개발자 대신에 SQL을 동적으로 만들어 실행해준다. 추가로 각각의 DB마다 다른 SQL을 사용하는 문제도 중간에서 해결해준다.
