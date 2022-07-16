@@ -8,13 +8,13 @@
 
 ## DB Table을 만든다.
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled.png)
+![Untitled](/image/database/lecture/3/Untitled.png)
 
 DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 자동으로 DDL 해주지 않기 때문이다. 
 
 ## Repository를 만든다.
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%201.png)
+![Untitled](/image/database/lecture/3/Untitled%201.png)
 
 - Repository의 Save 메소드 구현
     - 파라미터 바인딩을 사용하기 위해 PreparedStatement 사용
@@ -28,14 +28,14 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 ### getConnection() 메서드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%202.png)
+![Untitled](/image/database/lecture/3/Untitled%202.png)
 
 - getConnection()은 앞서 만들었던 DBConnectionUtil.getConnection()을 바로 호출한다.
 - DBConnectionUtil은 DriverManager에게 설정 정보를 넘겨주고 Connection을 받아온다.
 
 ### Close() 메서드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%203.png)
+![Untitled](/image/database/lecture/3/Untitled%203.png)
 
 - 자원은 반드시 사용한 것의 반대 순서로 Release 해야한다.
     - 얻을 때는 Connection → PreparedStatement → ResultSet순으로 얻었다.
@@ -44,7 +44,7 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 ## 테스트 코드 작성
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%204.png)
+![Untitled](/image/database/lecture/3/Untitled%204.png)
 
 - 아직까지 정상적으로 들어갔는지 조회를 할 수 없는 상황이기 때문에 JUnit을 이용한 테스트 검사는 할 수 없다.
 
@@ -52,7 +52,7 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 **SQL Injection 공격을 당하지 않기 위해.**
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%205.png)
+![Untitled](/image/database/lecture/3/Untitled%205.png)
 
 - 위와 같은 구문이 있을 경우, Statement를 사용하면 values의 memberId 자리에 앞에 있는 memberId가 저장된 select 쿼리가 직접 들어오게 된다. 즉, 원하지 않는 SQL Injection이 들어와서 의도치 않게 DB에 있는 모든 정보가 탈취될 수 있다.
 - 반면 PreparedStatement에서 ?,?는 SQL 구문이 아닌 단순한 파라미터로 인지되기 때문에 SQL Injection이 되지 않는다.
@@ -61,7 +61,7 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 ### Member 조회 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%206.png)
+![Untitled](/image/database/lecture/3/Untitled%206.png)
 
 - DriverManager로 얻은 Connection으로 다음과 같은 코드를 작성할 수 있다.
 - 결과는 ResultSet으로 돌려받는다. ResultSet은 DataTable과 같은 구조를 가지고 있으며, 내부적으로 Cursor가 가리키는 Column값을 불러올 수 있다.
@@ -69,14 +69,14 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 ### Member 조회 테스트 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%207.png)
+![Untitled](/image/database/lecture/3/Untitled%207.png)
 
 - Member를 저장한 후, Repository에서 Member를 찾아와 같은 객체인지 확인한다.
 - 이때, Member와 findMember는 Hash상으로는 같은 객체지만 주소 상으로는 다른 객체여야한다. 따라서 equals만 True를 만족한다.
 
 ## ResultSet 자료구조
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%208.png)
+![Untitled](/image/database/lecture/3/Untitled%208.png)
 
 - ResultSet은 “select member_id, money”로 지정하면 ‘meber_id→money’ 컬럼 순서대로 결과가 들어간다.
 - ResultSet은 내부적으로 커서를 사용한다. 커서를 이동해서 다음 데이터를 조회한다.
@@ -91,26 +91,26 @@ DB에 테이블을 만들어준다. JPA와 다르게 DriverManager는 Table을 �
 
 ### Member 수정 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%209.png)
+![Untitled](/image/database/lecture/3/Untitled%209.png)
 
 - memberId를 통해 Member를 찾아 그 Member의 Money 컬럼을 업데이트한다.
 - excute()는 영향받은 row값을 리턴한다.
 
 ### Member  수정 테스트 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%2010.png)
+![Untitled](/image/database/lecture/3/Untitled%2010.png)
 
 ## Member 삭제 기능 구현
 
 ### Member 삭제 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%2011.png)
+![Untitled](/image/database/lecture/3/Untitled%2011.png)
 
 - 특정 MemberId를 가지는 Member 삭제
 
 ### Member 삭제 테스트 코드
 
-![Untitled](3%20JDBC%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%202fa79466a8054d49b7bf9dcd0de8d8c7/Untitled%2012.png)
+![Untitled](/image/database/lecture/3/Untitled%2012.png)
 
 - 검증은 Member가 지워지고 그걸 조회했을 때 NoSuchElementException이 발생하는 것을 이용했다.
 
