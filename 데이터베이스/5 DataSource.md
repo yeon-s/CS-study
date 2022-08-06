@@ -10,7 +10,7 @@ DB와 통신을 하는데 있어서 반드시 커넥션이 필요하다는 것�
 
 ## DataSource
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled.png)
+![Untitled](/image/database/lecture/5/Untitled.png)
 
 - DriverManager를 통해 커넥션을 생성해서 가져온다.
 - 커넥션 풀에서 커넥션을 조회해서 사용한다.
@@ -19,7 +19,7 @@ DB와 통신을 하는데 있어서 반드시 커넥션이 필요하다는 것�
 
 ## DataSource : 커넥션 획득 방법의 추상화
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%201.png)
+![Untitled](/image/database/lecture/5/Untitled%201.png)
 
 커넥션 획득 방법의 추상화가 필요했다. 그래서 자바는 ‘DataSource’라는 인터페이스를 도입해서 커넥션 획득 방법을 추상화시켰다. 어플리케이션 로직은 DataSource 인터페이스를 의존성 주입받고 getConnection()이라는 메서드를 이용해 커넥션을 받아오는 방법을 추상화시킨 것이다.
 
@@ -35,7 +35,7 @@ DB와 통신을 하는데 있어서 반드시 커넥션이 필요하다는 것�
 
 ### DriverManager 살펴보기
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%202.png)
+![Untitled](/image/database/lecture/5/Untitled%202.png)
 
 - DriverManager는 커넥션을 요청할 때마다 생성해서 전달해준다.
 - DriverManager를 통해 커넥션을 얻을 때마다 설정값을 전달해줘야한다.(URL/ USERNAME / PASSWORD)
@@ -46,13 +46,13 @@ DB와 통신을 하는데 있어서 반드시 커넥션이 필요하다는 것�
 
 ### DriverManagerDataSource
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%203.png)
+![Untitled](/image/database/lecture/5/Untitled%203.png)
 
 - DriverManagerDataSource는 DriverManager를 이용해 DB에서 Connection을 얻어오는 클래스다.
 
 ### HikariDataSource
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%204.png)
+![Untitled](/image/database/lecture/5/Untitled%204.png)
 
 - HikariDataSource는 Hikari Connection Pool의 DataSource 인터페이스 구현체다.
 - 풀 사이즈 등을 설정할 수 있다.
@@ -61,42 +61,42 @@ DB와 통신을 하는데 있어서 반드시 커넥션이 필요하다는 것�
 
 ### DriverManger 테스트 코드
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%205.png)
+![Untitled](/image/database/lecture/5/Untitled%205.png)
 
 - DriverManger 테스트 코드를 통해 Connection을 얻어오는 방법이다.
 - 매번 DriverManager에 설정 정보를 전달해서 DB 커넥션을 얻는다 →매번 얻기 때문에 쓸데없는 시간 낭비가 존재한다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%206.png)
+![Untitled](/image/database/lecture/5/Untitled%206.png)
 
 - 실행 결과에서도 DriverManager가 요청마다 커넥션을 새로 만들어주는 것을 알 수 있다.
 - 각 Connection은 요청 때마다 새로 만들어지기 때문에 conn 번호가 0-3까지 변경된다.
 
 ### DriverManagerDataSource
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%207.png)
+![Untitled](/image/database/lecture/5/Untitled%207.png)
 
 - DriverManager에게 Connection을 얻는 방법을 DataSource를 통해 추상화했다.
 - DriverManager에게 요청할 때마다, Connection을 얻는 방식으로 동작한다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%208.png)
+![Untitled](/image/database/lecture/5/Untitled%208.png)
 
 코드 실행 결과 Connection이 요청될 때마다 만들어지는 것을 볼 수 있다.
 
 ### HikariDataSource
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%209.png)
+![Untitled](/image/database/lecture/5/Untitled%209.png)
 
 - HikariDataSource는 Hikari ConnectionPool이 Connection을 얻는 방법을 DataSource 인터페이스로 추상화 해둔 것이다.
 - Connection Pool은 I/O Bound Job이다. 따라서 오래걸리는 일이 많다. 따라서, 커넥션 풀을 만들기 위한 쓰레드가 하나 따로 만들어져서 처리가 된다. 즉, 병렬 프로그래밍으로 처리된다.
 - 이런 이유 떄문에 sleep()을 이용한다. 테스트 환경만 아니면 Sleep을 사용하지 않아도 된다. 왜냐하면 커넥션 풀이 다 만들어지자마자 끝이 나기 때문에 커넥션 풀에서 정상적으로 커넥션을 얻어온 것이 잘 보이지 않는다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2010.png)
+![Untitled](/image/database/lecture/5/Untitled%2010.png)
 
 실행 코드를 봤을 때 현재 0~3번 커넥션이 배정된 것으로 확인된다. 왜냐하면 4개의 요청이 왔고 4개의 요청이 커넥션을 반납하지 않았기 때문이다. 따라서 커넥션풀의 커넥션은 4개가 대여된 것이고, 아직도 사용하고 있는 중이다.
 
 ## DataSource와 DriverManager를 사용했을 때의 차이(설정과 사용의 분리)
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2011.png)
+![Untitled](/image/database/lecture/5/Untitled%2011.png)
 
 DriverManager와 DataSource를 사용하는 것은 실제 코드에서 큰 차이를 보여준다. 바로 ‘설정 부분’과 ‘사용 부분’의 분리가 이루어진다는 것이다. 이렇게 설정과 사용이 분리되게 되면 코드의 유지보수 관점에서 큰 장점이 존재한다.
 
@@ -111,7 +111,7 @@ DriverManager와 DataSource를 사용하는 것은 실제 코드에서 큰 차�
 
 ## Connection Pool 로그 살펴보기
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2012.png)
+![Untitled](/image/database/lecture/5/Untitled%2012.png)
 
 **MyPool Connection Adder**
 
@@ -137,39 +137,39 @@ DriverManager와 DataSource를 사용하는 것은 실제 코드에서 큰 차�
 
 ### 코드 변경
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2013.png)
+![Untitled](/image/database/lecture/5/Untitled%2013.png)
 
 다음과 같이 내부적으로 DataSource를 참조하도록 하고, DI 해준다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2014.png)
+![Untitled](/image/database/lecture/5/Untitled%2014.png)
 
 - DataSource를 사용할 때 / 사용하지 않을 때 커넥션을 받아오는 것이 다른 것을 확인했다. 위의 코드에서 볼 수 있듯이 DriverManager를 사용할 때는 커넥션을 불러오기 위해 설정값을 넣는다.
 - DataSource를 이용하면 커넥션을 불러오기 위해 초기 셋팅만 하고 추후에는 설정과 관계없이 getConnection()만 해주는 방식으로 리팩토링이 가능하다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2015.png)
+![Untitled](/image/database/lecture/5/Untitled%2015.png)
 
 - DriverManager를 사용할 때는 Null인지를 따지고, Exception이 발생하는지를 따져서 Try/Catch를 처리해줘야 했다. 따라서 코드 복잡도가 올라갔다.
 - DataSource를 활용할때 JDBCUtils를 이용해서 자원을 손쉽게 Release할 수 있다. 이 때 반납된 커넥션은 다시 커넥션 풀로 들어간다.
 
 ## DataSource 적용한 코드(DriverManagerDataSource→HikariDS)
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2016.png)
+![Untitled](/image/database/lecture/5/Untitled%2016.png)
 
 dataSource라는 인터페이스는 커넥션을 얻어오는 방법을 추상화했다. 그리고 현재 MemberRepositoryV1은 dataSource 인터페이스에 의존한다.
 
 ### DataSource DI 수정 코드
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2017.png)
+![Untitled](/image/database/lecture/5/Untitled%2017.png)
 
 DriverManagerDataSource와 HikariDataSource 모두 DataSource 인터페이스를 구현한 구현체다. 따라서 같은 DataSource 인터페이스를 구현한 구현체기 때문에 DriverManagerDataSource에서 HikariDataSource를 이용하기 위해서는 의존성 주입 코드만 변경해주면 된다. 즉, 변경점이 매우 최소화된다. 스프링 컨테이너를 사용하는 경우는 코드 변경이 아예 없을 수 있다.
 
 ## Hikari Connection Pool 적용한 테스트 코드+ 테스트 코드 결과
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2018.png)
+![Untitled](/image/database/lecture/5/Untitled%2018.png)
 
 - 다음과 같이 DriverManager를 이용하던 테스트 코드를 DI만 수정해서 사용할 수 있다.
 
-![Untitled](5%20DataSource%2046ea23ea921f4d2cb42de132437fc8ce/Untitled%2019.png)
+![Untitled](/image/database/lecture/5/Untitled%2019.png)
 
 - 커넥션 풀에서 얻은 ProxyConnection 객체의 주소는 매번 바뀐다. 하지만 커넥션은 항상 Conn0이다. 이유는?
 - 테스트 코드에서는 커넥션을 사용하고 Close를 한다. 커넥션 풀에서 얻은 커넥션을 JDBCUtils로 Close()하게 되면 이 커넥션은 커넥션 풀로 반환된다.
