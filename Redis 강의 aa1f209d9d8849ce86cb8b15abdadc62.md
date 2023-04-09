@@ -1,7 +1,5 @@
 # Redis 강의
 
-[공식문서](https://www.notion.so/7d6a3b67fc1a4c66af45b6eb8f3f8fa2)
-
 ## Redis를 학습해야 하는 이유
 
 - 손쉽게 사용이 가능한 인메모리 저장소
